@@ -15,4 +15,11 @@ docker run -d --name zookeeper --network kafka-network -e ZOOKEEPER_CLIENT_PORT=
 docker run -d --name kafka --network kafka-network -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 -e KAFKA_BROKER_ID=1 -e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 confluentinc/cp-kafka:latest
 652ebadae6042568ea9279324b47d92a653160313f85e218316ab767e7ceeeb5
 
+4- create topic -
+docker exec -it kafka-demos-kafka-1 kafka-topics --create --topic hello-world --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
 
+create topic -
+docker exec -it kafka-demos-kafka-1 kafka-topics  --create --topic demo-topic --bootstrap-server localhost:9092 --partitions 3 --replication-factor 1
+
+5- run consumer - 
+docker exec -it kafka-demos-kafka-1 kafka-console-consumer  --topic demo-topic --bootstrap-server localhost:9092 --from-beginning --property print.key=true --property print.partition=true
