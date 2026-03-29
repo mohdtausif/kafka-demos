@@ -1,0 +1,43 @@
+# Prometheus configuration for Kafka monitoring
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'kafka-capstone'
+    environment: 'poc'
+
+scrape_configs:
+  # Kafka Broker 1 JMX metrics
+  - job_name: 'kafka-broker-1'
+    static_configs:
+      - targets: ['localhost:9101']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  # Kafka Broker 2 JMX metrics
+  - job_name: 'kafka-broker-2'
+    static_configs:
+      - targets: ['localhost:9102']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  # Kafka Broker 3 JMX metrics
+  - job_name: 'kafka-broker-3'
+    static_configs:
+      - targets: ['localhost:9103']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+rule_files:
+  - 'alerts.yml'
