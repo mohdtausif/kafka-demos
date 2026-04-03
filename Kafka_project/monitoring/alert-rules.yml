@@ -1,0 +1,111 @@
+# Prometheus Alert Rules for Kafka Pipeline
+
+groups:
+  - name: kafka_broker_alerts
+    rules:
+      - alert: KafkaBrokerDown
+        expr: up{job="kafka"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Kafka broker is down"
+          description: "Kafka broker {{ $labels.instance }} has been down for more than 1 minute."
+
+      - alert: KafkaUnderReplicatedPartitions
+        expr: kafka_server_replicamanager_underreplicatedpartitions > 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Under-replicated partitions detected"
+          description: "Broker {{ $labels.instance }} has {{ $value }} under-replicated partitions."
+
+      - alert: KafkaOfflinePartitions
+        expr: kafka_controller_kafkacontroller_offlinepartitionscount > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Offline partitions detected"
+          description: "{{ $value }} partitions are offline on the Kafka cluster."
+
+  - name: kafka_consumer_alerts
+    rules:
+      - alert: HighConsumerLag
+        expr: kafka_consumer_group_lag > 1000
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High consumer lag detected"
+          description: "Consumer group {{ $labels.group }} on topic {{ $labels.topic }} partition {{ $labels.partition }} has a lag of {{ $value }}."
+
+      - alert: CriticalConsumerLag
+        expr: kafka_consumer_group_lag > 10000
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical consumer lag"
+          description: "Consumer group {{ $labels.group }} has critical lag of {{ $value }} on topic {{ $labels.topic }}."
+
+      - alert: ConsumerGroupInactive
+        expr: kafka_consumer_group_members == 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Consumer group has no active members"
+          description: "Consumer group {{ $labels.group }} has no active members."
+
+  - name: kafka_producer_alerts
+    rules:
+      - alert: HighProducerErrorRate
+        expr: rate(kafka_producer_record_error_total[5m]) > 0.01
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High producer error rate"
+          description: "Producer error rate is {{ $value }} errors/sec."
+
+  - name: kafka_connect_alerts
+    rules:
+      - alert: ConnectorFailed
+        expr: kafka_connect_connector_status{status="failed"} == 1
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Kafka Connect connector failed"
+          description: "Connector {{ $labels.connector }} has failed."
+
+      - alert: ConnectorTaskFailed
+        expr: kafka_connect_connector_task_status{status="failed"} == 1
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Kafka Connect task failed"
+          description: "Task {{ $labels.task }} of connector {{ $labels.connector }} has failed."
+
+  - name: application_alerts
+    rules:
+      - alert: ServiceDown
+        expr: up{job=~".*-producer|.*-consumer|.*-streams"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Microservice is down"
+          description: "Service {{ $labels.job }} at {{ $labels.instance }} has been down for more than 1 minute."
+
+      - alert: HighDLQRate
+        expr: rate(kafka_consumer_records_consumed_total{topic="order.dlq"}[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High DLQ message rate"
+          description: "Dead letter queue is receiving {{ $value }} messages/sec, indicating persistent processing failures."

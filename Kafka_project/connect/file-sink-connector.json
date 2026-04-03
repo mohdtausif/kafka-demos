@@ -1,0 +1,11 @@
+{
+  "name": "file-sink-connector",
+  "config": {
+    "connector.class": "org.apache.kafka.connect.file.FileStreamSinkConnector",
+    "topics": "notifications",
+    "file": "/tmp/notifications-output.txt",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "tasks.max": "1"
+  }
+}

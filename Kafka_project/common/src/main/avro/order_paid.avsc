@@ -1,0 +1,18 @@
+{
+  "type": "record",
+  "name": "OrderPaid",
+  "namespace": "com.ecommerceflow.avro",
+  "doc": "Event emitted when payment is processed for an order",
+  "fields": [
+    {"name": "orderId", "type": "string", "doc": "Unique order identifier"},
+    {"name": "customerId", "type": "string", "doc": "Customer who placed the order"},
+    {"name": "productId", "type": "string", "doc": "Product being ordered"},
+    {"name": "totalAmount", "type": {"type": "bytes", "logicalType": "decimal", "precision": 10, "scale": 2}, "doc": "Total payment amount"},
+    {"name": "currency", "type": "string", "default": "USD", "doc": "Currency code"},
+    {"name": "paymentMethod", "type": "string", "doc": "Payment method used (CREDIT_CARD, DEBIT_CARD, PAYPAL, etc.)"},
+    {"name": "transactionId", "type": "string", "doc": "Payment transaction reference ID"},
+    {"name": "status", "type": "string", "default": "PAID", "doc": "Order status"},
+    {"name": "paidAt", "type": {"type": "long", "logicalType": "timestamp-millis"}, "doc": "Timestamp when payment was processed"},
+    {"name": "metadata", "type": ["null", {"type": "map", "values": "string"}], "default": null, "doc": "Additional metadata"}
+  ]
+}

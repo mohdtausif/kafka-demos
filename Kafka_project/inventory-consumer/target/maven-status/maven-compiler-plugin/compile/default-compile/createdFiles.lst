@@ -1,0 +1,5 @@
+com/ecommerceflow/inventory/config/KafkaConsumerConfig.class
+com/ecommerceflow/inventory/listener/OrderInventoryListener.class
+com/ecommerceflow/inventory/controller/InventoryController.class
+com/ecommerceflow/inventory/InventoryConsumerApplication.class
+com/ecommerceflow/inventory/service/InventoryService.class

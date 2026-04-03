@@ -1,0 +1,60 @@
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true
+rules:
+  # Broker Metrics
+  - pattern: kafka.server<type=BrokerTopicMetrics, name=(.+), topic=(.+)><>Count
+    name: kafka_server_brokertopicmetrics_$1_total
+    type: COUNTER
+    labels:
+      topic: "$2"
+
+  - pattern: kafka.server<type=BrokerTopicMetrics, name=(.+)><>Count
+    name: kafka_server_brokertopicmetrics_$1_total
+    type: COUNTER
+
+  # Request Metrics
+  - pattern: kafka.network<type=RequestMetrics, name=RequestsPerSec, request=(.+), version=([0-9]+)><>Count
+    name: kafka_network_requestmetrics_requests_per_sec
+    type: COUNTER
+    labels:
+      request: "$1"
+      version: "$2"
+
+  # Consumer Group Metrics
+  - pattern: kafka.server<type=group-coordinator-metrics, name=(.+)><>Value
+    name: kafka_server_group_coordinator_$1
+    type: GAUGE
+
+  # Partition Metrics
+  - pattern: kafka.log<type=Log, name=Size, topic=(.+), partition=(.+)><>Value
+    name: kafka_log_size
+    type: GAUGE
+    labels:
+      topic: "$1"
+      partition: "$2"
+
+  - pattern: kafka.log<type=Log, name=NumLogSegments, topic=(.+), partition=(.+)><>Value
+    name: kafka_log_num_segments
+    type: GAUGE
+    labels:
+      topic: "$1"
+      partition: "$2"
+
+  # Controller Metrics
+  - pattern: kafka.controller<type=KafkaController, name=(.+)><>Value
+    name: kafka_controller_$1
+    type: GAUGE
+
+  # ReplicaManager
+  - pattern: kafka.server<type=ReplicaManager, name=(.+)><>Value
+    name: kafka_server_replicamanager_$1
+    type: GAUGE
+
+  # Consumer Lag
+  - pattern: kafka.server<type=FetcherLagMetrics, name=ConsumerLag, clientId=(.+), topic=(.+), partition=(.+)><>Value
+    name: kafka_server_consumer_lag
+    type: GAUGE
+    labels:
+      client_id: "$1"
+      topic: "$2"
+      partition: "$3"

@@ -1,0 +1,9 @@
+/Users/taha/Documents/Kafka_project/order-producer/src/main/java/com/ecommerceflow/producer/controller/OrderController.java
+/Users/taha/Documents/Kafka_project/order-producer/src/main/java/com/ecommerceflow/producer/model/DeliveryRequest.java
+/Users/taha/Documents/Kafka_project/order-producer/src/main/java/com/ecommerceflow/producer/handler/GlobalExceptionHandler.java
+/Users/taha/Documents/Kafka_project/order-producer/src/main/java/com/ecommerceflow/producer/model/PaymentRequest.java
+/Users/taha/Documents/Kafka_project/order-producer/src/main/java/com/ecommerceflow/producer/config/KafkaProducerConfig.java
+/Users/taha/Documents/Kafka_project/order-producer/src/main/java/com/ecommerceflow/producer/service/OrderEventProducer.java
+/Users/taha/Documents/Kafka_project/order-producer/src/main/java/com/ecommerceflow/producer/OrderProducerApplication.java
+/Users/taha/Documents/Kafka_project/order-producer/src/main/java/com/ecommerceflow/producer/model/ShipmentRequest.java
+/Users/taha/Documents/Kafka_project/order-producer/src/main/java/com/ecommerceflow/producer/model/OrderRequest.java

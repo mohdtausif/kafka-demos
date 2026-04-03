@@ -1,0 +1,5 @@
+/Users/taha/Documents/Kafka_project/inventory-consumer/src/main/java/com/ecommerceflow/inventory/controller/InventoryController.java
+/Users/taha/Documents/Kafka_project/inventory-consumer/src/main/java/com/ecommerceflow/inventory/InventoryConsumerApplication.java
+/Users/taha/Documents/Kafka_project/inventory-consumer/src/main/java/com/ecommerceflow/inventory/config/KafkaConsumerConfig.java
+/Users/taha/Documents/Kafka_project/inventory-consumer/src/main/java/com/ecommerceflow/inventory/listener/OrderInventoryListener.java
+/Users/taha/Documents/Kafka_project/inventory-consumer/src/main/java/com/ecommerceflow/inventory/service/InventoryService.java

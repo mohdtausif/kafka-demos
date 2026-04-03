@@ -1,0 +1,10 @@
+com/ecommerceflow/avro/OrderCreated.class
+com/ecommerceflow/avro/OrderPaid.class
+com/ecommerceflow/common/KafkaTopics.class
+com/ecommerceflow/avro/OrderCreated$Builder.class
+com/ecommerceflow/avro/OrderPaid$Builder.class
+com/ecommerceflow/avro/OrderDelivered$Builder.class
+com/ecommerceflow/avro/OrderDelivered.class
+com/ecommerceflow/common/OrderStatus.class
+com/ecommerceflow/avro/OrderShipped.class
+com/ecommerceflow/avro/OrderShipped$Builder.class

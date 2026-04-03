@@ -1,0 +1,18 @@
+{
+  "type": "record",
+  "name": "OrderDelivered",
+  "namespace": "com.ecommerceflow.avro",
+  "doc": "Event emitted when an order is delivered",
+  "fields": [
+    {"name": "orderId", "type": "string", "doc": "Unique order identifier"},
+    {"name": "customerId", "type": "string", "doc": "Customer who placed the order"},
+    {"name": "productId", "type": "string", "doc": "Product delivered"},
+    {"name": "quantity", "type": "int", "doc": "Quantity delivered"},
+    {"name": "deliveredTo", "type": "string", "doc": "Person who received the delivery"},
+    {"name": "signatureRequired", "type": "boolean", "default": false, "doc": "Whether signature was required"},
+    {"name": "deliveryNotes", "type": ["null", "string"], "default": null, "doc": "Delivery notes or instructions"},
+    {"name": "status", "type": "string", "default": "DELIVERED", "doc": "Order status"},
+    {"name": "deliveredAt", "type": {"type": "long", "logicalType": "timestamp-millis"}, "doc": "Timestamp when order was delivered"},
+    {"name": "metadata", "type": ["null", {"type": "map", "values": "string"}], "default": null, "doc": "Additional metadata"}
+  ]
+}

@@ -1,0 +1,5 @@
+com/ecommerceflow/analytics/controller/AnalyticsController.class
+com/ecommerceflow/analytics/AnalyticsConsumerApplication.class
+com/ecommerceflow/analytics/config/KafkaConsumerConfig.class
+com/ecommerceflow/analytics/listener/OrderAnalyticsListener.class
+com/ecommerceflow/analytics/service/AnalyticsService.class

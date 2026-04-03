@@ -1,0 +1,20 @@
+{
+  "type": "record",
+  "name": "OrderCreated",
+  "namespace": "com.ecommerceflow.avro",
+  "doc": "Event emitted when a new order is placed",
+  "fields": [
+    {"name": "orderId", "type": "string", "doc": "Unique order identifier"},
+    {"name": "customerId", "type": "string", "doc": "Customer who placed the order"},
+    {"name": "productId", "type": "string", "doc": "Product being ordered"},
+    {"name": "productName", "type": ["null", "string"], "default": null, "doc": "Product display name"},
+    {"name": "quantity", "type": "int", "doc": "Quantity ordered"},
+    {"name": "unitPrice", "type": {"type": "bytes", "logicalType": "decimal", "precision": 10, "scale": 2}, "doc": "Price per unit"},
+    {"name": "totalAmount", "type": {"type": "bytes", "logicalType": "decimal", "precision": 10, "scale": 2}, "doc": "Total order amount"},
+    {"name": "currency", "type": "string", "default": "USD", "doc": "Currency code"},
+    {"name": "shippingAddress", "type": ["null", "string"], "default": null, "doc": "Shipping address"},
+    {"name": "status", "type": "string", "default": "CREATED", "doc": "Order status"},
+    {"name": "createdAt", "type": {"type": "long", "logicalType": "timestamp-millis"}, "doc": "Timestamp when order was created"},
+    {"name": "metadata", "type": ["null", {"type": "map", "values": "string"}], "default": null, "doc": "Additional metadata"}
+  ]
+}

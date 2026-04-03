@@ -1,0 +1,96 @@
+Capstone Project – Detailed Specification
+Capstone Title: Kafka Producer-Consumer Pipeline
+Business Context: As a Backend Engineer or Integration Engineer, you are responsible for building a complete event-driven data pipeline using Apache Kafka for an e-commerce platform. Your role is to implement reliable producers for order events, build scalable consumers for real-time processing, integrate with external systems using Kafka Connect, implement stream processing with Kafka Streams, and ensure the pipeline is production-ready with monitoring, security, and operational excellence. 
+3.1 Capstone Scenario & Problem Statement
+You are a Senior Backend Engineer at "EcommerceFlow," an online retail platform processing thousands of orders daily. The platform needs to transition from a monolithic architecture to an event-driven microservices architecture using Kafka. The system must capture order events (order placed, payment processed, order shipped, order delivered), process them in real-time for analytics and notifications, integrate with external systems (inventory management, customer notification service), and provide dashboards for business metrics. Current challenges include: tight coupling between services, lack of real-time visibility into order status, difficulty scaling individual components, no event replay capability for debugging, and manual monitoring. Your challenge is to design and implement a complete Kafka-based event streaming pipeline with reliable producers, scalable consumer groups, Kafka Connect for integration, Kafka Streams for real-time analytics, Schema Registry for data governance, monitoring with Prometheus/Grafana, and security configurations, ensuring the pipeline is fault-tolerant, scalable, and production-ready. 
+3.2 Functional Requirements (12 comprehensive requirements)
+Design event-driven architecture with Kafka as central event backbone for order processing
+Implement reliable Kafka producers for order lifecycle events (order.created, order.paid, order.shipped, order.delivered) 
+Create scalable consumer applications with consumer groups for different processing needs (analytics, notifications, inventory updates) 
+Implement Avro schemas with Schema Registry for type-safe message serialization
+Build Kafka Connect pipeline to integrate with external database (source connector) and notification service (sink connector) 
+Develop Kafka Streams application for real-time order analytics (order count, revenue aggregation by time window) 
+Implement proper error handling, dead letter queues, and retry mechanisms
+Apply partitioning strategy for order events to maintain ordering guarantees
+Set up monitoring with Prometheus and Grafana for cluster health and consumer lag
+Implement security configurations (authentication, authorization, encryption)
+Create operational documentation and runbooks for production deployment
+Demonstrate end-to-end pipeline execution with complete order lifecycle
+3.3 Technical Requirements (10 specifications)
+Use Apache Kafka with Docker Compose or cloud deployment (Confluent Cloud/AWS MSK)
+Implement producers in Java with proper error handling and retry logic
+Implement consumers with manual offset commit for exactly-once semantics
+Use Confluent Schema Registry with Avro for message serialization
+Deploy Kafka Connect with minimum 2 connectors (1 source, 1 sink)
+Build Kafka Streams application for real-time aggregations with windowing
+Configure topic replication factor ≥2 for fault tolerance
+Implement monitoring with Prometheus and Grafana dashboards
+Apply security configurations (SSL/TLS and ACLs at minimum)
+Follow Kafka best practices for production deployment (proper configurations, resource sizing)
+3.4 Capstone Tasks (Hours 1-20) - 8 major phases
+Architecture Design & Kafka Cluster Setup (Hours 1-3): Design event-driven architecture with Kafka topics for order lifecycle, Define topic structure (order.created, order.paid, order.shipped, order.delivered), Set up Kafka cluster with Docker Compose (3 brokers, ZooKeeper/KRaft, Schema Registry), Configure Kafka Connect and Kafka Streams environments, Create topics with appropriate partitions and replication factor, Document cluster architecture and component interactions 
+Schema Design & Producer Implementation (Hours 4-6): Design Avro schemas for order events with Schema Registry, Implement producer application for order lifecycle events (Java), Configure producer for reliability (acks=all, idempotence=true), Implement partitioning strategy (partition by order_id for ordering), Add error handling, retry logic, and logging, Test producer with various order scenarios, Document producer configurations and schema evolution strategy 
+Consumer Group Implementation (Hours 7-9): Build consumer application for order analytics processing, Implement consumer group with manual offset commit, Create second consumer for order notifications, Build third consumer for inventory updates, Implement deserialization with Avro and Schema Registry, Add error handling and dead letter queue (DLQ) for failed messages, Test consumer scaling (add/remove consumers), Document consumer configurations and offset management 
+Kafka Connect Integration (Hours 10-12): Deploy Kafka Connect in distributed mode, Configure JDBC source connector to ingest customer data from database, Configure sink connector (file sink or HTTP sink) for notification service, Apply Single Message Transforms (SMTs) for data enrichment, Test end-to-end data flow from source to sink, Monitor connector status and troubleshoot failures, Document connector configurations and data flow 
+Kafka Streams Real-Time Analytics (Hours 13-15): Build Kafka Streams application for order analytics, Implement stateless transformations (filter orders by status), Create windowed aggregations (Count orders per hour (tumbling window), Total revenue per hour, Top products ordered), Implement KStream-KTable join (orders with customer data), Write aggregated results to output topics, Test stream processing with sample data, Document topology and aggregation logic 
+Monitoring & Observability (Hours 16-17): Configure Kafka metrics export with JMX, Set up Prometheus to scrape Kafka metrics, Create Grafana dashboards (Broker metrics (throughput, disk usage, leader elections), Consumer lag by consumer group, Producer throughput and latency, Kafka Connect connector status), Configure alerts for critical metrics (high consumer lag, broker down), Document monitoring setup and alert thresholds 
+Security & Production Hardening (Hours 18-19): Configure SSL/TLS for broker-to-broker and client-to-broker communication, Set up SASL authentication (SASL/PLAIN or SASL/SCRAM), Create ACL policies for topics and consumer groups, Configure client quotas to prevent resource exhaustion, Test secure connections from producers and consumers, Document security configurations and access control policies 
+Testing, Documentation & Demo (Hours 20): Perform end-to-end testing (Produce order events through complete lifecycle, Verify consumers process messages correctly, Validate Kafka Connect data flow, Check Kafka Streams aggregations, Monitor dashboards for metrics), Create comprehensive documentation (Architecture diagram with data flows, Deployment guide with configurations, Operational runbook for common scenarios, Security and access control documentation), Prepare demo materials (Live pipeline execution walkthrough, Monitoring dashboards showcase, Failure scenarios and recovery demonstrations), Final validation and handover preparation 
+3.5 Expected Deliverables (10 categories)
+Kafka Cluster Deployment: Docker Compose configuration for multi-broker cluster, Schema Registry setup, Kafka Connect deployment, Topic configurations with partitions and replication 
+Avro Schemas: Schema definitions for order events (order.created, order.paid, order.shipped, order.delivered), Schema Registry integration, Schema evolution strategy documentation 
+Producer Applications: Order event producer in Java, Partitioning strategy implementation, Error handling and retry logic, Producer performance configurations 
+Consumer Applications: 3+ consumer applications with different processing logic (analytics, notifications, inventory), Consumer group configurations, Manual offset commit implementation, Dead letter queue setup 
+Kafka Connect Pipeline: Distributed Kafka Connect deployment, Source connector configuration (JDBC or file), Sink connector configuration (file, HTTP, or S3), SMT transformations 
+Kafka Streams Application: Real-time analytics stream processing app, Windowed aggregations (count, sum, top-N), KStream-KTable join implementation, Output topics with results 
+Monitoring & Alerting: Prometheus and Grafana deployment, Kafka cluster dashboards, Consumer lag monitoring, Alert rules for critical metrics 
+Security Configurations: SSL/TLS certificates and configuration, SASL authentication setup, ACL policies for access control, Client quota configurations 
+Documentation Package: Architecture diagram with Kafka topics and data flows, Deployment and configuration guide, Operational runbook with troubleshooting, Security and access control documentation 
+Demo Materials: End-to-end pipeline demonstration, Monitoring dashboards walkthrough, Failure recovery scenarios, Presentation explaining architecture and design decisions 
+3.6 Evidence List (14 types)
+Docker Compose file with Kafka cluster configuration
+Avro schema files (.avsc) registered in Schema Registry
+Producer application source code with configurations
+Consumer application source code (3+ consumers)
+Kafka Connect connector configurations (source and sink)
+Kafka Streams application source code with topology
+Prometheus configuration and Kafka metrics scrape config
+Grafana dashboard JSON exports
+SSL certificates and security configuration files
+ACL policies and access control documentation
+Architecture diagrams showing event flow
+Screenshots of monitoring dashboards showing metrics
+Test execution logs showing end-to-end pipeline operation
+Demo video or presentation with live execution
+3.7 Evaluation Rubric (10 criteria x 10 marks = 100 total)
+1. Architecture Design & Kafka Setup (10 marks)
+Quality of event-driven architecture design
+Proper Kafka cluster setup with replication and fault tolerance
+2. Schema Design & Schema Registry (10 marks)
+Avro schema quality and completeness
+Schema Registry integration and evolution strategy
+3. Producer Implementation (10 marks)
+Producer reliability configurations (acks, idempotence)
+Partitioning strategy and error handling
+4. Consumer Implementation (10 marks)
+3+ consumers with proper group management
+Manual offset commit and exactly-once semantics
+5. Kafka Connect Integration (10 marks)
+Working source and sink connectors
+SMT transformations and data flow
+6. Kafka Streams Processing (10 marks)
+Real-time aggregations with windowing
+Stream topology quality and complexity
+7. Monitoring & Observability (10 marks)
+Prometheus and Grafana setup
+Comprehensive dashboards and alerting
+8. Security Implementation (10 marks)
+SSL/TLS encryption configuration
+Authentication and ACL policies
+9. Error Handling & Resilience (10 marks)
+Dead letter queues and retry mechanisms
+Fault tolerance and recovery strategies
+10. Documentation & Operational Readiness (10 marks)
+Complete architecture and deployment documentation
+Operational runbook quality
+Passing Criteria: Minimum 70/100 overall score required to pass. Critical Pass Requirements: Working Kafka cluster with multiple brokers; Minimum 1 producer and 3 consumers implemented; Schema Registry integration with Avro; Kafka Connect with 1 source and 1 sink connector; Kafka Streams application with windowed aggregations; Monitoring dashboards with Prometheus and Grafana; Basic security (SSL or SASL authentication); Complete architecture documentation. Score of 85+ indicates production-ready Kafka pipeline suitable for enterprise deployment. 

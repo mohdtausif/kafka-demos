@@ -1,0 +1,19 @@
+{
+  "type": "record",
+  "name": "OrderShipped",
+  "namespace": "com.ecommerceflow.avro",
+  "doc": "Event emitted when an order is shipped",
+  "fields": [
+    {"name": "orderId", "type": "string", "doc": "Unique order identifier"},
+    {"name": "customerId", "type": "string", "doc": "Customer who placed the order"},
+    {"name": "productId", "type": "string", "doc": "Product being shipped"},
+    {"name": "quantity", "type": "int", "doc": "Quantity shipped"},
+    {"name": "trackingNumber", "type": "string", "doc": "Shipment tracking number"},
+    {"name": "carrier", "type": "string", "doc": "Shipping carrier (FEDEX, UPS, USPS, DHL)"},
+    {"name": "shippingAddress", "type": "string", "doc": "Delivery address"},
+    {"name": "estimatedDelivery", "type": ["null", "string"], "default": null, "doc": "Estimated delivery date"},
+    {"name": "status", "type": "string", "default": "SHIPPED", "doc": "Order status"},
+    {"name": "shippedAt", "type": {"type": "long", "logicalType": "timestamp-millis"}, "doc": "Timestamp when order was shipped"},
+    {"name": "metadata", "type": ["null", {"type": "map", "values": "string"}], "default": null, "doc": "Additional metadata"}
+  ]
+}

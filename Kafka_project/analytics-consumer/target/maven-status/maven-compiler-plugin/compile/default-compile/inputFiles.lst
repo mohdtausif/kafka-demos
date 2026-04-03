@@ -1,0 +1,5 @@
+/Users/taha/Documents/Kafka_project/analytics-consumer/src/main/java/com/ecommerceflow/analytics/AnalyticsConsumerApplication.java
+/Users/taha/Documents/Kafka_project/analytics-consumer/src/main/java/com/ecommerceflow/analytics/controller/AnalyticsController.java
+/Users/taha/Documents/Kafka_project/analytics-consumer/src/main/java/com/ecommerceflow/analytics/config/KafkaConsumerConfig.java
+/Users/taha/Documents/Kafka_project/analytics-consumer/src/main/java/com/ecommerceflow/analytics/listener/OrderAnalyticsListener.java
+/Users/taha/Documents/Kafka_project/analytics-consumer/src/main/java/com/ecommerceflow/analytics/service/AnalyticsService.java
